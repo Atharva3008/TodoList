@@ -1,0 +1,267 @@
+/* body  */
+body {
+    background-color: #f5f5f5;
+    font-family: Helvetica, sans-serif;
+    overflow: scroll;
+    transition: ease-out 0.2s;
+}   
+body > * ::selection {
+  background-color: rgba(32, 154, 224, 0.308);
+  color: black;
+}
+
+
+
+/* navigation bar  */
+nav {
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.5);
+}
+.side-bar {
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: ease-out 0.2s;
+}
+.side-bar:hover {
+  background-color: #1bbdd6;
+}
+
+
+
+
+/* list items and lists */
+.todo li,.complete li {
+    border-radius: 8px;
+    border: 1px;
+    border-color: #56fff1 ;
+    background-color: white;
+    box-shadow: 0px 0px 8px rgba(104, 104, 104, 0.5);
+    font-size: larger;
+    cursor: pointer;
+    animation: fadein 0.4s;
+    float: left;
+}
+@keyframes fadein {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+.rem-btn, .comp-btn {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px; 
+    border-radius: 15px; 
+    font-size: 10px; 
+    text-align: center; 
+}
+.edit-btn {
+  width: 30px;
+  height: 30px;
+  padding: 1px 0px; 
+  border-radius: 15px; 
+  font-size: 18px; 
+  text-align: center; 
+}
+
+.complete:empty::after {
+    display: block;
+    color: grey;
+    text-align: center;
+    float: center;
+    content: 'No tasks completed yet!';
+}
+.todo:empty::after {
+    display: block;
+    color: grey;
+    text-align: center;
+    float: center;
+    content: 'No tasks to-do!';
+}
+.complete li {
+    background-color: rgb(213, 247, 228);
+    box-shadow:0px 0px 8px rgba(100, 255, 242, 0.5);
+}
+
+
+/* input bar styling */
+.form-control:focus {
+    border-color: #56fff1;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(100, 255, 242, 0.5);
+}
+
+
+/* remove all button */
+.rem-all:disabled {
+  color: #7e7e7e;
+  border-color: #7e7e7e;
+}
+.rem-all:disabled:focus {
+  box-shadow: 0 0 0 .2rem #7e7e7e7e;
+}
+
+
+
+
+/* side menu */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+    transition: 0.2s;
+    padding-top: 60px;
+    box-shadow: 5px 5px 25px rgba(0,0,0,.28);
+  }
+  .sidenav a {
+    padding: 8px 8px 8px 20px;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    width: 350px;
+    transition: 0.2s;
+    color: #000;
+  }
+  .sidenav a i{
+    width: 50px;
+    padding: 0px 10px;
+  }
+  .sidenav a:hover {
+    color:#222;
+    text-decoration: none;
+    background-color: #eee;
+  }
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+  }
+  .sidenav > span {
+    cursor: pointer;
+  }
+
+
+
+/* small task empty popup  */
+.popup {
+  position: absolute;
+  bottom: 1rem;
+  right: 20px;
+  padding: 0.5rem;
+  background-color: black;
+  color: white;
+  box-shadow: 5px 6px 10px rgba(0,0,0,0.8);
+  border-radius: 4px;
+  z-index: 10;
+  display: none;
+  animation: displaypopup 2s cubic-bezier(.42,0,.58,1)
+  /* transition: 2s ease-in-out; */
+}
+
+@keyframes displaypopup {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+/* Edit task popup */
+.popup-flex{
+  margin:30px;
+}
+.popup-container {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(21, 17, 17, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.popup-content {
+    background-color: rgb(255, 255, 255);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 8px;
+    color: black;
+    width: 50%;
+    margin-bottom: 20px;
+}
+.popup-content p{
+    font-size: 17px;
+    padding: 10px;
+    line-height: 20px;
+}
+.popup-content span{
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.popup-content span:hover,
+.popup-content span:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.show{
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.more-articles{
+  margin:30px 30px 50px;
+  font-size:20px;
+}
+.more-articles a{
+  margin:0 10px;
+  text-decoration:underline;
+}
+.editbuttons {
+  margin: auto;
+  margin-top: 20px;
+}
+.cancel-edit {
+  margin: 0 5px;
+}
+.done-edit {
+  margin: 0 5px;
+}
+
+@media(min-width:1000px) {
+  .lst-btn {
+    display: none;
+  }
+}
