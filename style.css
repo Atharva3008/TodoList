@@ -260,7 +260,7 @@ nav {
   margin: 0 5px;
 }
 
-@media(min-width:1000px) {
+@media(max-width:1200px) {
   .lst-btn {
     display: none;
   }

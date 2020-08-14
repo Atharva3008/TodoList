@@ -185,9 +185,9 @@ function renderTodoList() {
   //check whether to display grid or list
   if(data.list===false && screen.width>1200) {
     nw[0].className = 'notes-wrapper col-lg-12 col-12 mx-0 mb-3';
-    listbtn.innerHTML = '<i class="fa fa-bars"></i>List';
+    listbtn.innerHTML = '<i class="fa fa-bars"></i>&nbsp;List';
   } else {
-    listbtn.innerHTML = '<i class="fa fa-th-large"></i>Grid';
+    listbtn.innerHTML = '<i class="fa fa-th-large"></i>&nbsp;Grid';
   }
 
   //render the list
@@ -277,7 +277,6 @@ function disable_Rem_all() {
 //open the edit window
 function showEdit() {
     closeNav();
-    console.log(data);
     popup.classList.add('show');
     // check whether it was a double click or single click 
     if( event.type==="dblclick" ) {
@@ -297,11 +296,14 @@ function showEdit() {
 
 //close edit window and change the edited text
 function donee() {
-    console.log(data.todo.indexOf(thisss.childNodes[0].innerText));
-    data.todo[data.todo.indexOf(thisss.childNodes[0].innerText)] = editinp.value.trim();
-    thisss.childNodes[0].innerText =  editinp.value.trim();
-    dataObjectUpdated();
-    popup.classList.remove('show');
+    if (editinp.value==="") {
+      showPopUp();
+    } else {
+      data.todo[data.todo.indexOf(thisss.childNodes[0].innerText)] = editinp.value.trim();
+      thisss.childNodes[0].innerText =  editinp.value.trim();
+      dataObjectUpdated();
+      popup.classList.remove('show');
+    }
 }
 
 //close edit window without changing task text
@@ -318,7 +320,6 @@ window.onclick = function(event) {
 
 
 function togrid() {
-  console.log(nw);
   nw[0].className = 'notes-wrapper col-sm-12 col-12 mx-0 mb-3';
   const allitems = document.querySelectorAll(".list-item");
   for(i=0;i<allitems.length;i++) {
@@ -348,11 +349,11 @@ cancel_edit.addEventListener("click",cancel);
 inp[0].addEventListener("click",closeNav);
 listbtn.addEventListener("click",() => {
   if(data.list===true) {
-    listbtn.innerHTML = '<i class="fa fa-bars"></i>List';
+    listbtn.innerHTML = '<i class="fa fa-bars"></i>&nbsp;List';
     togrid();
   } else {
     tolist();
-    listbtn.innerHTML = '<i class="fa fa-th-large"></i>Grid';
+    listbtn.innerHTML = '<i class="fa fa-th-large"></i>&nbsp;Grid';
   }
 });
 
@@ -366,7 +367,10 @@ inp[0].addEventListener("keyup", () => {
 
 // detect keys to edit the item (ENTER-change, ESCAPE-do not change)
 editinp.addEventListener("keyup", () => {
-  if (event.keyCode === 13) {
+
+  if ( event.keyCode===13 && event.target.value==="") {
+    showPopUp();
+  } else if (event.keyCode === 13) {
       event.preventDefault();
       donee();
   } else if(event.key==="Escape") {
